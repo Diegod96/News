@@ -1,14 +1,10 @@
-import numpy as np
+import os
+import pickle
+import urllib
+import flask
 from flask import Flask, request, render_template
 from flask_cors import CORS
-import os
-import joblib
-import pickle
-import flask
-import os
-import newspaper
 from newspaper import Article
-import urllib
 
 app = Flask(__name__)
 CORS(app)
