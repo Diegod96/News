@@ -1,24 +1,16 @@
-import pandas as pd
-import numpy as np
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
-from sklearn.pipeline import Pipeline
-from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.linear_model import LogisticRegression, SGDClassifier
-from sklearn.metrics import roc_auc_score
-from sklearn.preprocessing import StandardScaler
-from sklearn.decomposition import PCA
-from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn import metrics
-from sklearn.feature_extraction.text import TfidfTransformer
-from nltk.corpus import stopwords
-
 import pickle
 
-from sklearn.svm import LinearSVC
-from sklearn.tree import DecisionTreeClassifier
+import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfTransformer
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression, SGDClassifier
+from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+import nltk
+nltk.download('punkt')
+from sklearn.pipeline import Pipeline
 
 
 def clean_data(file_paths):
@@ -92,7 +84,7 @@ def naive_bayes(news_df):
 
     # Serialising the file
     with open('naive.pickle', 'wb') as handle:
-        pickle.dump(pipeline, handle, protocol=pickle.HIGHEST_PROTOCOL)
+        pickle.dump(pipeline, handle)
 
 
 def sgd_classifier(news_df):
@@ -122,7 +114,7 @@ def sgd_classifier(news_df):
     print(confusion_matrix(y_test, prediction))
 
     with open('sgd.pickle', 'wb') as handle:
-        pickle.dump(pipeline, handle, protocol=pickle.HIGHEST_PROTOCOL)
+        pickle.dump(pipeline, handle)
 
 
 def logistic_regression(news_df):
@@ -152,7 +144,7 @@ def logistic_regression(news_df):
     print(confusion_matrix(y_test, prediction))
 
     with open('regression.pickle', 'wb') as handle:
-        pickle.dump(pipeline, handle, protocol=pickle.HIGHEST_PROTOCOL)
+        pickle.dump(pipeline, handle)
 
 
 if __name__ == '__main__':
