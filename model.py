@@ -82,7 +82,7 @@ def naive_bayes(news_df):
 
     # Serialising the file
     with open('naive.pickle', 'wb') as handle:
-        pickle.dump(pipeline, handle, protocol=pickle.HIGHEST_PROTOCOL)
+        pickle.dump(pipeline, handle)
 
 
 def sgd_classifier(news_df):
@@ -112,7 +112,7 @@ def sgd_classifier(news_df):
     print(confusion_matrix(y_test, prediction))
 
     with open('sgd.pickle', 'wb') as handle:
-        pickle.dump(pipeline, handle, protocol=pickle.HIGHEST_PROTOCOL)
+        pickle.dump(pipeline, handle)
 
 
 def logistic_regression(news_df):
@@ -142,7 +142,7 @@ def logistic_regression(news_df):
     print(confusion_matrix(y_test, prediction))
 
     with open('regression.pickle', 'wb') as handle:
-        pickle.dump(pipeline, handle, protocol=pickle.HIGHEST_PROTOCOL)
+        pickle.dump(pipeline, handle)
 
 
 if __name__ == '__main__':
