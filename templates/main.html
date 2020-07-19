@@ -12,22 +12,34 @@
 
 </head>
 
-<body>
- <div class="login">
-	<h1>Predict Fake News</h1>
 
-     <!-- Main Input For Receiving Query to our ML -->
+<body>
+<div class="login">
+    <h1>Fake News Predictor</h1>
+
     <form action="{{ url_for('predict')}}" method="post">
-    	<input type="text" name="news" placeholder="Enter the news url" required="required" />
+        <input type="url"
+               name="news"
+               placeholder="Enter the url of the news article"
+               pattern="https?://.+"
+               required="required" />
         <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
 
     </form>
 
-   <br>
-   <br>
-   {{ prediction_text }}
-
- </div>
+    <br>
+    <br>
+    {{ regression_text }}
+    <br>
+    <br>
+    {{ naive_text }}
+    <br>
+    <br>
+    {{ sgd_text }}
+    <br>
+    <br>
+    {{ prediction_text }}
+</div>
 
 
 </body>

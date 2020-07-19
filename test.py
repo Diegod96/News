@@ -13,7 +13,7 @@ import urllib
 
 
 if __name__ == '__main__':
-    with open('test.pickle', 'rb') as handle:
+    with open('regression.pickle', 'rb') as handle:
         model = pickle.load(handle)
 
     # url = request.get_data(as_text=True)[5:]

@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
-from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
@@ -11,8 +12,12 @@ from sklearn.decomposition import PCA
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn import metrics
+from sklearn.feature_extraction.text import TfidfTransformer
+from nltk.corpus import stopwords
+
 import pickle
 
+from sklearn.svm import LinearSVC
 from sklearn.tree import DecisionTreeClassifier
 
 
@@ -66,7 +71,7 @@ def naive_bayes(news_df):
     # Split up our data into test and train
     X_train, X_test, y_train, y_test = train_test_split(news_df['news'],
                                                         news_df['label'],
-                                                        test_size=0.2)
+                                                        test_size=0.25)
 
     # Pipeline that creates a bag of words
     # Applies Multinominal Naive Bayes model
@@ -120,8 +125,39 @@ def sgd_classifier(news_df):
         pickle.dump(pipeline, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 
+def logistic_regression(news_df):
+    """
+    Performs Logistic Regression on the news dataset
+    Export model via pickle to be used via Flask
+    :param news_df:
+    :return:
+    """
+    X_train, X_test, y_train, y_test = train_test_split(news_df['news'],
+                                                        news_df['label'],
+                                                        test_size=0.25)
+
+    pipeline = Pipeline([
+        ('vect', CountVectorizer()),
+        ('tfidf', TfidfTransformer()),
+        ('log', LogisticRegression())
+    ])
+
+    pipeline.fit(X_train, y_train)
+
+    prediction = pipeline.predict(X_test)
+
+    # Checking model performance
+    print("Logistic Regression Performance")
+    print(classification_report(y_test, prediction))
+    print(confusion_matrix(y_test, prediction))
+
+    with open('regression.pickle', 'wb') as handle:
+        pickle.dump(pipeline, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+
 if __name__ == '__main__':
     file_paths = ['data/Fake.csv', 'data/True.csv']
     news_df = clean_data(file_paths)
     naive_bayes(news_df)
     sgd_classifier(news_df)
+    logistic_regression(news_df)
