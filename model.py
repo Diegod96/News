@@ -8,6 +8,8 @@ from sklearn.linear_model import LogisticRegression, SGDClassifier
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
+import nltk
+nltk.download('punkt')
 from sklearn.pipeline import Pipeline
 
 
