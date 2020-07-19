@@ -1,4 +1,4 @@
-# Spark-Project
+# Fake News Detector
 * Created a Fake News Detector to determine if a given news article is true or fake.
 * The authenticity of an article is determined by three machine learning models: Logistic Regression, Multinominal Naive Bayes, and SGD Classification.
 * The models are trained on a Fake & Real news dataset.
