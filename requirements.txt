@@ -35,5 +35,5 @@ threadpoolctl==2.1.0
 tinysegmenter==0.3
 tldextract==2.2.2
 tqdm==4.48.0
-urllib3==1.25.9
+urllib3==1.26.5
 Werkzeug==1.0.1
